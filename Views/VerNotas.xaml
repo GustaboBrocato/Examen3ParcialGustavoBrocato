@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--  Creado Por Gustavo Brocato #202010030250  -->
+<ContentPage
+    x:Class="Examen3ParcialGustavoBrocato.Views.VerNotas"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title=""
+    BackgroundImageSource="backgroundfirma.png">
+    <Grid>
+        <!--  Content Grid  -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  Header  -->
+        <StackLayout
+            Grid.Row="0"
+            Margin="0,0,0,15"
+            BackgroundColor="Transparent"
+            Orientation="Vertical">
+            <Frame
+                Margin="0,0,0,0"
+                Padding="0,10,0,10"
+                BackgroundColor="{DynamicResource LightBlue70}"
+                BorderColor="Black"
+                CornerRadius="20">
+                <StackLayout
+                    Margin="0,0,0,0"
+                    Padding="0,0,0,0"
+                    BackgroundColor="Transparent"
+                    Orientation="Horizontal">
+                    <ImageButton
+                        x:Name="btnBack"
+                        Margin="10,0,0,0"
+                        Aspect="AspectFit"
+                        BackgroundColor="Transparent"
+                        Clicked="btnBack_Clicked"
+                        HeightRequest="40"
+                        Source="backarrow.png"
+                        WidthRequest="40" />
+                    <!--  Spacer  -->
+                    <BoxView BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" />
+                    <Label
+                        Margin="0,0,130,0"
+                        FontAttributes="Bold"
+                        Text="Notas Agregadas"
+                        TextColor="Black"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+            </Frame>
+            <Frame
+                Padding="0,0,0,0"
+                BackgroundColor="{DynamicResource LightBlue70}"
+                BorderColor="Black">
+                <Label
+                    Margin="0,0,0,0"
+                    FontAttributes="Bold"
+                    FontSize="12"
+                    HorizontalTextAlignment="Center"
+                    Text="Haga click en una nota para actualizar"
+                    TextColor="Gray"
+                    VerticalOptions="CenterAndExpand" />
+            </Frame>
+        </StackLayout>
+
+
+
+        <!--  Body - Collection view  -->
+        <ScrollView Grid.Row="1">
+            <StackLayout>
+                <CollectionView
+                    x:Name="collectionViewNotas"
+                    ItemSizingStrategy="MeasureFirstItem"
+                    ItemsSource="{Binding Notas}"
+                    SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame
+                                x:Name="frameNotaCollection"
+                                Margin="5"
+                                Padding="5"
+                                BackgroundColor="{DynamicResource LightBlue70}"
+                                BorderColor="Black"
+                                CornerRadius="10"
+                                HasShadow="True"
+                                HeightRequest="150"
+                                HorizontalOptions="FillAndExpand">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TappedCommand}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <StackLayout
+                                    HorizontalOptions="FillAndExpand"
+                                    Orientation="Horizontal"
+                                    VerticalOptions="FillAndExpand">
+                                    <Image
+                                        Margin="3,10,3,10"
+                                        Aspect="AspectFit"
+                                        HeightRequest="80"
+                                        Source="nota.png"
+                                        WidthRequest="80" />
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            x:Name="labelDescripcion"
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="1"
+                                            Margin="20,10,0,5"
+                                            FontAttributes="Bold"
+                                            FontSize="16"
+                                            HorizontalOptions="CenterAndExpand"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding Descripcion}"
+                                            TextColor="Black"
+                                            WidthRequest="200" />
+                                        <Label
+                                            x:Name="labelFecha"
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="1"
+                                            Margin="20,0,0,5"
+                                            FontAttributes="Bold"
+                                            FontSize="11"
+                                            HorizontalOptions="CenterAndExpand"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding Fecha}"
+                                            TextColor="Black"
+                                            WidthRequest="200" />
+                                        <ImageButton
+                                            x:Name="btnAudio"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Margin="10,0,0,10"
+                                            Aspect="AspectFit"
+                                            BackgroundColor="Transparent"
+                                            Command="{Binding AudioCommand}"
+                                            CommandParameter="{Binding .}"
+                                            HeightRequest="35"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Source="playaudio.png"
+                                            WidthRequest="35" />
+                                        <ImageButton
+                                            x:Name="btnImagen"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Margin="10,0,0,10"
+                                            Aspect="AspectFit"
+                                            BackgroundColor="Transparent"
+                                            Command="{Binding ImageCommand}"
+                                            CommandParameter="{Binding .}"
+                                            HeightRequest="35"
+                                            HorizontalOptions="CenterAndExpand"
+                                            IsVisible="{Binding Visibilidad}"
+                                            Source="image.png"
+                                            WidthRequest="35" />
+                                        <Button
+                                            x:Name="btnEliminar"
+                                            Grid.Row="2"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="2"
+                                            Margin="10,0,0,10"
+                                            BackgroundColor="Red"
+                                            Command="{Binding EliminarCommand}"
+                                            CommandParameter="{Binding .}"
+                                            FontAttributes="Bold"
+                                            FontSize="8"
+                                            HeightRequest="30"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Text="Eliminar"
+                                            TextColor="White"
+                                            WidthRequest="100" />
+
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+        <Frame
+            Grid.Row="2"
+            Margin="0,0,0,10"
+            Padding="0,0,0,0"
+            BackgroundColor="Transparent"
+            CornerRadius="20"
+            HeightRequest="40"
+            IsVisible="False">
+            <toolkit:MediaElement
+                x:Name="mediaElementAudio"
+                Margin="0,0,0,0"
+                Aspect="AspectFit"
+                BackgroundColor="Transparent"
+                HeightRequest="40"
+                Source=""
+                WidthRequest="300" />
+        </Frame>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--  Creado Por Gustavo Brocato #202010030250  -->
+<ContentPage
+    x:Class="Examen3ParcialGustavoBrocato.Views.EditNota"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title=""
+    BackgroundImageSource="backgroundfirma.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Frame
+            Grid.Row="0"
+            Margin="0,0,0,0"
+            Padding="0,10,0,10"
+            BackgroundColor="{DynamicResource LightBlue70}"
+            BorderColor="Black"
+            CornerRadius="20">
+            <StackLayout
+                Margin="0,0,0,0"
+                Padding="0,0,0,0"
+                BackgroundColor="Transparent"
+                Orientation="Horizontal">
+                <ImageButton
+                    x:Name="btnBack"
+                    Margin="10,0,0,0"
+                    Aspect="AspectFit"
+                    BackgroundColor="Transparent"
+                    Clicked="btnBack_Clicked"
+                    HeightRequest="40"
+                    Source="backarrow.png"
+                    WidthRequest="40" />
+                <!--  Spacer  -->
+                <BoxView BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" />
+                <Label
+                    Margin="0,0,160,0"
+                    FontAttributes="Bold"
+                    Text="Editar Nota"
+                    TextColor="Black"
+                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+        </Frame>
+
+        <ActivityIndicator
+            x:Name="activityIndicator"
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsLoading}"
+            IsVisible="{Binding IsLoading}"
+            VerticalOptions="Center"
+            Color="Green" />
+
+        <ScrollView Grid.Row="1">
+            <Frame
+                x:Name="framePrincipal"
+                Margin="10,5,10,10"
+                Padding="5,10,5,10"
+                BackgroundColor="{DynamicResource LightBlue70}"
+                BorderColor="Black"
+                CornerRadius="20">
+                <StackLayout Orientation="Vertical">
+
+                    <Label
+                        Margin="0,5,0,5"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalTextAlignment="Center"
+                        Text="Descripción"
+                        TextColor="Black"
+                        VerticalOptions="Start" />
+                    <Frame
+                        Margin="5,0,5,5"
+                        Padding="0,0,0,0"
+                        BackgroundColor="White"
+                        CornerRadius="10">
+                        <Editor
+                            x:Name="entryDescripcion"
+                            Margin="5,0,5,0"
+                            BackgroundColor="Transparent"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HeightRequest="160"
+                            HorizontalTextAlignment="Center"
+                            Placeholder="Agregue una Descripción"
+                            PlaceholderColor="Gray"
+                            TextColor="Black" />
+                    </Frame>
+
+
+
+                    <Label
+                        Margin="0,10,0,5"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalTextAlignment="Center"
+                        Text="Descripción (voz)"
+                        TextColor="Black"
+                        VerticalOptions="Start" />
+
+                    <StackLayout Orientation="Horizontal">
+                        <ImageButton
+                            x:Name="btnGrabarAudio"
+                            Grid.Column="2"
+                            Margin="0,0,0,10"
+                            Aspect="AspectFit"
+                            BackgroundColor="Transparent"
+                            HeightRequest="60"
+                            Pressed="btnGrabarAudio_Pressed"
+                            Released="btnGrabarAudio_Released"
+                            Source="grabar.png"
+                            WidthRequest="60" />
+                        <Frame
+                            Margin="0,0,0,10"
+                            Padding="0,0,0,0"
+                            BackgroundColor="Transparent"
+                            CornerRadius="20"
+                            HeightRequest="40">
+                            <toolkit:MediaElement
+                                x:Name="mediaElementAudio"
+                                Margin="0,0,0,0"
+                                Aspect="AspectFit"
+                                BackgroundColor="Transparent"
+                                HeightRequest="40"
+                                Source=""
+                                WidthRequest="250" />
+                        </Frame>
+                        <ImageButton
+                            x:Name="btnCancelarAudio"
+                            Grid.Column="2"
+                            Margin="0,0,0,10"
+                            Aspect="AspectFit"
+                            BackgroundColor="Transparent"
+                            Clicked="btnCancelarAudio_Clicked"
+                            HeightRequest="48"
+                            Source="cancelar.png"
+                            WidthRequest="48" />
+
+                    </StackLayout>
+
+                    <Label
+                        Margin="0,10,0,5"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalTextAlignment="Center"
+                        Text="Imagen"
+                        TextColor="Black"
+                        VerticalOptions="Start" />
+
+                    <Image
+                        x:Name="imgFoto"
+                        Margin="0,0,0,10"
+                        HeightRequest="200"
+                        Source="emptyimg.png"
+                        WidthRequest="200" />
+
+                    <StackLayout Margin="0,10,0,0" Orientation="Horizontal">
+                        <Button
+                            x:Name="btnSeleccionar"
+                            Margin="30,0,10,20"
+                            Padding="0"
+                            BackgroundColor="Green"
+                            Clicked="btnSeleccionar_Clicked"
+                            CornerRadius="20"
+                            FontSize="10"
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            SemanticProperties.Hint="Seleccionar Foto"
+                            Text="Seleccionar Foto"
+                            VerticalOptions="Center" />
+
+                        <Button
+                            x:Name="btnTomar"
+                            Margin="30,0,10,20"
+                            Padding="0"
+                            BackgroundColor="Green"
+                            Clicked="btnTomar_Clicked"
+                            CornerRadius="20"
+                            FontSize="10"
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            SemanticProperties.Hint="Tomar Foto"
+                            Text="Tomar Foto"
+                            VerticalOptions="Center" />
+
+                        <ImageButton
+                            x:Name="btnCancelarFoto"
+                            Grid.Column="2"
+                            Margin="0,0,0,10"
+                            Aspect="AspectFit"
+                            BackgroundColor="Transparent"
+                            Clicked="btnCancelarFoto_Clicked"
+                            HeightRequest="48"
+                            Source="cancelar.png"
+                            WidthRequest="48" />
+
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+        <Frame
+            Grid.Row="2"
+            Margin="10,10,10,10"
+            Padding="5,10,5,10"
+            BackgroundColor="{DynamicResource LightBlue70}"
+            BorderColor="Black"
+            CornerRadius="20">
+            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                <Button
+                    x:Name="btnAgregar"
+                    Margin="0,0,10,0"
+                    BackgroundColor="Green"
+                    BorderColor="Black"
+                    Clicked="btnAgregar_Clicked"
+                    CornerRadius="20"
+                    FontSize="12"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Agregar"
+                    Text="Actualizar Nota"
+                    VerticalOptions="CenterAndExpand" />
+                <Button
+                    x:Name="btnEliminar"
+                    Margin="10,0,0,0"
+                    BackgroundColor="Red"
+                    BorderColor="Black"
+                    Clicked="btnEliminar_Clicked"
+                    CornerRadius="20"
+                    FontSize="12"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Hint="Agregar"
+                    Text="Eliminar"
+                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
+        </Frame>
+    </Grid>
+</ContentPage>
